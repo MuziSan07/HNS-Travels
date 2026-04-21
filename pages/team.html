@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Team — HNS Travels</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .team-intro { padding: 120px 60px; background: var(--white); text-align: center; }
+    .team-intro .section-title { margin-bottom: 20px; }
+    .team-intro p { max-width: 680px; margin: 0 auto; font-size: 0.9rem; color: var(--text-light); line-height: 1.9; }
+
+    .team-leadership { padding: 0 60px 120px; background: var(--white); }
+    .leadership-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 1300px; margin: 0 auto; }
+    .leader-card { position: relative; overflow: hidden; cursor: none; }
+    .leader-img { width: 100%; height: 420px; overflow: hidden; position: relative; }
+    .leader-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease, filter 0.5s ease; filter: grayscale(20%); }
+    .leader-card:hover .leader-img img { transform: scale(1.06); filter: grayscale(0%); }
+    .leader-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,31,23,0.75) 0%, transparent 55%); z-index: 1; }
+    .leader-socials { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 2; opacity: 0; transition: opacity 0.4s ease, bottom 0.4s ease; }
+    .leader-card:hover .leader-socials { opacity: 1; bottom: 100px; }
+    .leader-socials a { width: 36px; height: 36px; border: 1px solid rgba(200,169,110,0.6); display: flex; align-items: center; justify-content: center; color: var(--secondary); font-size: 0.75rem; transition: background 0.3s ease; text-decoration: none; }
+    .leader-socials a:hover { background: var(--secondary); color: var(--dark); }
+    .leader-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px; z-index: 2; }
+    .leader-name { font-family: var(--font-heading); font-size: 1.35rem; color: var(--white); margin-bottom: 4px; }
+    .leader-role { font-family: var(--font-sans); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary); margin-bottom: 10px; }
+    .leader-bio { font-size: 0.78rem; color: rgba(255,255,255,0.7); line-height: 1.6; max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .leader-card:hover .leader-bio { max-height: 100px; }
+
+    .team-guides { padding: 80px 60px 120px; background: var(--light); }
+    .guides-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; max-width: 1300px; margin: 60px auto 0; }
+    .guide-card { background: var(--white); padding: 32px 24px; text-align: center; cursor: none; transition: transform 0.4s ease, box-shadow 0.4s ease; }
+    .guide-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(13,31,23,0.12); }
+    .guide-avatar { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; margin: 0 auto 20px; border: 2px solid var(--secondary); }
+    .guide-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .guide-name { font-family: var(--font-heading); font-size: 1.1rem; color: var(--primary); margin-bottom: 4px; }
+    .guide-role { font-size: 0.62rem; font-family: var(--font-sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary); margin-bottom: 14px; }
+    .guide-bio { font-size: 0.78rem; color: var(--text-light); line-height: 1.7; margin-bottom: 16px; }
+    .guide-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+    .guide-tag { font-size: 0.6rem; font-family: var(--font-sans); letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(200,169,110,0.4); color: var(--secondary); }
+
+    .join-section { padding: 120px 60px; background: var(--dark); text-align: center; }
+    .join-section .section-title { color: var(--white); margin-bottom: 24px; }
+    .join-section p { max-width: 620px; margin: 0 auto 48px; font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.9; }
+    .join-benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto 60px; text-align: left; }
+    .benefit-item { padding: 32px; border: 1px solid rgba(200,169,110,0.2); }
+    .benefit-item i { font-size: 1.4rem; color: var(--secondary); margin-bottom: 16px; display: block; }
+    .benefit-item h4 { font-family: var(--font-heading); font-size: 1rem; color: var(--white); margin-bottom: 10px; }
+    .benefit-item p { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+    @media (max-width: 1100px) {
+      .leadership-grid { grid-template-columns: repeat(2, 1fr); }
+      .guides-grid { grid-template-columns: repeat(2, 1fr); }
+      .join-benefits { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .team-intro, .team-leadership, .team-guides, .join-section { padding: 80px 24px; }
+      .leadership-grid, .guides-grid, .join-benefits { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursor-dot"></div>
+  <button id="back-to-top"><i class="fas fa-arrow-up"></i></button>
+
+  <nav id="navbar">
+    <a href="../index.html" class="nav-logo"><img src="../static/img/logo/HNS_Travels.png" alt="HNS Travels" class="nav-logo-img" /></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html">Journal</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a><a href="about.html">About</a><a href="destinations.html">Destinations</a>
+    <a href="packages.html">Packages</a><a href="gallery.html">Gallery</a><a href="blog.html">Journal</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Book Now</a>
+  </div>
+
+    <div class="page-hero">
+    <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1500534314209-a157d0f56b2f?auto=format&fit=crop&w=1920&q=80');"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">Meet the <em>Team</em></h1>
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span>Our Team</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADERSHIP -->
+  <section class="team-leadership">
+    <div class="section-header reveal" style="text-align:center; margin-bottom:60px;">
+      <span class="section-tag">Leadership</span>
+      <h2 class="section-title">The Founding <em>Circle</em></h2>
+    </div>
+    <div class="leadership-grid">
+      <div class="leader-card reveal delay-1">
+        <div class="leader-img">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Ali Hassan" />
+          <div class="leader-img-overlay"></div>
+          <div class="leader-socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+          <div class="leader-info">
+            <div class="leader-name">Ali Hassan Mir</div>
+            <div class="leader-role">Co-Founder & CEO</div>
+            <div class="leader-bio">Born in Karimabad, Ali has spent over 20 years guiding expeditions across Karakoram. He founded HNS Travels with a vision to share Pakistan's north with the world.</div>
+          </div>
+        </div>
+      </div>
+      <div class="leader-card reveal delay-2">
+        <div class="leader-img">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80" alt="Bashir Ahmed" />
+          <div class="leader-img-overlay"></div>
+          <div class="leader-socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+          <div class="leader-info">
+            <div class="leader-name">Bashir Ahmed Khan</div>
+            <div class="leader-role">Co-Founder & Head of Operations</div>
+            <div class="leader-bio">A Skardu native and veteran trekker, Bashir oversees all logistics and safety protocols. His meticulous planning has made thousands of journeys seamless and unforgettable.</div>
+          </div>
+        </div>
+      </div>
+      <div class="leader-card reveal delay-3">
+        <div class="leader-img">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Farhan Baig" />
+          <div class="leader-img-overlay"></div>
+          <div class="leader-socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+          <div class="leader-info">
+            <div class="leader-name">Farhan Baig</div>
+            <div class="leader-role">Co-Founder & Creative Director</div>
+            <div class="leader-bio">An award-winning landscape photographer from Nagar, Farhan shapes the visual and storytelling identity of HNS Travels — and leads our photography expedition packages.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDES -->
+  <section class="team-guides">
+    <div class="section-header reveal" style="text-align:center;">
+      <span class="section-tag">On the Ground</span>
+      <h2 class="section-title">Our Mountain <em>Guides</em></h2>
+    </div>
+    <div class="guides-grid">
+      <div class="guide-card reveal delay-1">
+        <div class="guide-avatar"><img src="https://i.pravatar.cc/150?img=11" alt="Nasir" /></div>
+        <div class="guide-name">Nasir Ullah</div>
+        <div class="guide-role">Senior Trek Guide</div>
+        <p class="guide-bio">15 years of high-altitude experience. Certified wilderness first responder. Specializes in K2 base camp and Concordia routes.</p>
+        <div class="guide-tags"><span class="guide-tag">K2 Route</span><span class="guide-tag">Concordia</span></div>
+      </div>
+      <div class="guide-card reveal delay-2">
+        <div class="guide-avatar"><img src="https://i.pravatar.cc/150?img=15" alt="Imran" /></div>
+        <div class="guide-name">Imran Hussain</div>
+        <div class="guide-role">Cultural Guide</div>
+        <p class="guide-bio">Fluent in Burushaski, Shina, Balti, and English. Expert in Hunza valley history, local traditions, and artisan crafts.</p>
+        <div class="guide-tags"><span class="guide-tag">Hunza Culture</span><span class="guide-tag">Local History</span></div>
+      </div>
+      <div class="guide-card reveal delay-3">
+        <div class="guide-avatar"><img src="https://i.pravatar.cc/150?img=52" alt="Shazia" /></div>
+        <div class="guide-name">Shazia Bano</div>
+        <div class="guide-role">Family Tour Lead</div>
+        <p class="guide-bio">Pakistan's first certified female mountain guide from Gilgit-Baltistan. Leads all family-friendly and women-exclusive tours.</p>
+        <div class="guide-tags"><span class="guide-tag">Family Tours</span><span class="guide-tag">Women Groups</span></div>
+      </div>
+      <div class="guide-card reveal delay-4">
+        <div class="guide-avatar"><img src="https://i.pravatar.cc/150?img=20" alt="Zubair" /></div>
+        <div class="guide-name">Zubair Ahmed</div>
+        <div class="guide-role">4x4 & Jeep Expert</div>
+        <p class="guide-bio">Master of the Karakoram Highway and remote jeep tracks. Has driven every accessible road in GB twice over — forwards and backwards.</p>
+        <div class="guide-tags"><span class="guide-tag">KKH</span><span class="guide-tag">Jeep Trails</span></div>
+      </div>
+      <div class="guide-card reveal delay-1">
+        <div class="guide-avatar"><img src="https://i.pravatar.cc/150?img=33" alt="Rehman" /></div>
+        <div class="guide-name">Abdul Rehman</div>
+        <div class="guide-role">Photography Guide</div>
+        <p class="guide-bio">Former photojournalist turned mountain guide. Knows every golden-hour spot between Gilgit and Khaplu. Brings a tripod on every trek.</p>
+        <div class="guide-tags"><span class="guide-tag">Photography</span><span class="guide-tag">Sunrise Spots</span></div>
+      </div>
+      <div class="guide-card reveal delay-2">
+        <div class="guide-avatar"><img src="https://i.pravatar.cc/150?img=27" alt="Daud" /></div>
+        <div class="guide-name">Daud Karimi</div>
+        <div class="guide-role">Adventure Sports Lead</div>
+        <p class="guide-bio">Certified rock climber, paragliding instructor, and whitewater kayaker. Leads all adventure-sport extensions to standard packages.</p>
+        <div class="guide-tags"><span class="guide-tag">Rock Climbing</span><span class="guide-tag">Paragliding</span></div>
+      </div>
+      <div class="guide-card reveal delay-3">
+        <div class="guide-avatar"><img src="https://i.pravatar.cc/150?img=44" alt="Meher" /></div>
+        <div class="guide-name">Meher Gul</div>
+        <div class="guide-role">Logistics Coordinator</div>
+        <p class="guide-bio">The invisible engine behind every smooth trip. Meher handles permits, accommodation bookings, porter arrangements, and meal planning with flawless precision.</p>
+        <div class="guide-tags"><span class="guide-tag">Permits</span><span class="guide-tag">Logistics</span></div>
+      </div>
+      <div class="guide-card reveal delay-4">
+        <div class="guide-avatar"><img src="https://i.pravatar.cc/150?img=60" alt="Farida" /></div>
+        <div class="guide-name">Farida Sultana</div>
+        <div class="guide-role">Guest Relations Manager</div>
+        <p class="guide-bio">Your first and last point of contact. Farida ensures every traveler feels at home from the moment they land to the moment they depart.</p>
+        <div class="guide-tags"><span class="guide-tag">Guest Care</span><span class="guide-tag">Feedback</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN US -->
+  <section class="join-section">
+    <span class="section-tag reveal">Join the Family</span>
+    <h2 class="section-title reveal">Passionate About <em>Mountains?</em></h2>
+    <p class="reveal">We're always looking for experienced, passionate individuals to join our team. Whether you're a seasoned guide, a creative storyteller, or a logistics expert — if you love northern Pakistan, we want to hear from you.</p>
+    <div class="join-benefits">
+      <div class="benefit-item reveal delay-1">
+        <i class="fas fa-mountain"></i>
+        <h4>Work in Paradise</h4>
+        <p>Your office is the Karakoram. Every workday is an expedition through some of the world's most extraordinary landscapes.</p>
+      </div>
+      <div class="benefit-item reveal delay-2">
+        <i class="fas fa-users"></i>
+        <h4>A Real Community</h4>
+        <p>Join a tight-knit team of mountain lovers who genuinely care for each other, their guests, and the environment.</p>
+      </div>
+      <div class="benefit-item reveal delay-3">
+        <i class="fas fa-graduation-cap"></i>
+        <h4>Training & Growth</h4>
+        <p>We invest in our team with ongoing certifications, safety training, language courses, and opportunities to grow into leadership roles.</p>
+      </div>
+    </div>
+    <a href="contact.html" class="btn-primary">Send Your Application</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">HNS <span>Travels</span></div>
+        <p>Hunza. Nagar. Skardu. Three valleys, a thousand lifetimes of beauty.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="destinations.html"><i class="fas fa-chevron-right"></i> Destinations</a></li>
+          <li><a href="packages.html"><i class="fas fa-chevron-right"></i> Packages</a></li>
+          <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> Our Story</a></li>
+          <li><a href="team.html"><i class="fas fa-chevron-right"></i> Our Team</a></li>
+          <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+92 300 1234567</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>hello@hnstravels.pk</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 HNS Travels. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

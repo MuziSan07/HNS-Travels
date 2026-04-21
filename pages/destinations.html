@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destinations — HNS Travels</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .destinations-section { padding: 100px 60px 140px; background: var(--white); }
+    .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 64px; }
+    .filter-tab { font-family: var(--font-sans); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 10px 24px; border: 1px solid rgba(26,58,42,0.2); background: transparent; color: var(--text); cursor: none; transition: all 0.3s ease; }
+    .filter-tab.active, .filter-tab:hover { background: var(--primary); color: var(--secondary); border-color: var(--primary); }
+    .destinations-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; max-width: 1300px; margin: 0 auto; }
+    .dest-card { position: relative; overflow: hidden; cursor: none; }
+    .dest-card-img { width: 100%; height: 360px; overflow: hidden; position: relative; }
+    .dest-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+    .dest-card:hover .dest-card-img img { transform: scale(1.07); }
+    .dest-card-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,31,23,0.85) 0%, transparent 55%); z-index: 1; }
+    .dest-badge { position: absolute; top: 20px; right: 20px; background: rgba(13,31,23,0.7); border: 1px solid rgba(200,169,110,0.4); color: var(--secondary); font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 6px 12px; z-index: 2; backdrop-filter: blur(4px); }
+    .dest-card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px; z-index: 2; }
+    .dest-card-name { font-family: var(--font-display); font-size: 1.6rem; color: var(--white); margin-bottom: 6px; }
+    .dest-card-desc { font-size: 0.78rem; color: rgba(255,255,255,0.7); line-height: 1.6; max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .dest-card:hover .dest-card-desc { max-height: 80px; }
+    .dest-card-link { display: inline-flex; align-items: center; gap: 8px; color: var(--secondary); font-family: var(--font-sans); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; margin-top: 14px; opacity: 0; transition: opacity 0.4s ease 0.1s; }
+    .dest-card:hover .dest-card-link { opacity: 1; }
+    .dest-card-link i { font-size: 0.65rem; transition: transform 0.3s ease; }
+    .dest-card-link:hover i { transform: translateX(4px); }
+
+    .dest-feature { padding: 120px 60px; background: var(--light); }
+    .dest-feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1300px; margin: 0 auto; }
+    .dest-feature-img { height: 520px; overflow: hidden; }
+    .dest-feature-img img { width: 100%; height: 100%; object-fit: cover; }
+    .dest-feature-text .section-title { margin-bottom: 24px; }
+    .dest-feature-text p { font-size: 0.88rem; color: var(--text-light); line-height: 1.9; margin-bottom: 16px; }
+    .dest-feature-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0; }
+    .dest-stat { text-align: center; padding: 20px; background: var(--white); }
+    .dest-stat-num { font-family: var(--font-display); font-size: 2rem; color: var(--secondary); display: block; }
+    .dest-stat-label { font-family: var(--font-sans); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-light); }
+
+    @media (max-width: 1100px) { .destinations-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 900px) { .dest-feature-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .destinations-section, .dest-feature { padding: 80px 24px; } .destinations-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div id="cursor-dot"></div>
+  <button id="back-to-top"><i class="fas fa-arrow-up"></i></button>
+
+  <nav id="navbar">
+    <a href="../index.html" class="nav-logo"><img src="../static/img/logo/HNS_Travels.png" alt="HNS Travels" class="nav-logo-img" /></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html">Journal</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a><a href="about.html">About</a><a href="destinations.html">Destinations</a>
+    <a href="packages.html">Packages</a><a href="gallery.html">Gallery</a><a href="blog.html">Journal</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Book Now</a>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1920&q=80');"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">Our <em>Destinations</em></h1>
+      <div class="breadcrumb"><a href="../index.html">Home</a><span>/</span><span>Destinations</span></div>
+    </div>
+  </div>
+
+  <section class="destinations-section">
+    <div style="text-align:center;margin-bottom:60px;" class="reveal">
+      <span class="section-tag">Three Valleys, Endless Wonder</span>
+      <h2 class="section-title">Where Would You Like to <em>Go?</em></h2>
+    </div>
+    <div class="filter-bar reveal">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="hunza">Hunza</button>
+      <button class="filter-tab" data-filter="nagar">Nagar</button>
+      <button class="filter-tab" data-filter="skardu">Skardu</button>
+      <button class="filter-tab" data-filter="gilgit">Gilgit</button>
+    </div>
+    <div class="destinations-grid">
+
+      <div class="dest-card filterable reveal delay-1" data-cat="hunza">
+        <div class="dest-card-img">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" alt="Hunza Valley" />
+          <div class="dest-card-img-overlay"></div>
+          <div class="dest-badge">2,438 m elevation</div>
+        </div>
+        <div class="dest-card-info">
+          <div class="dest-card-name">Hunza Valley</div>
+          <div class="dest-card-desc">A valley of ancient forts, cherry blossoms, and views that make you question reality. Home to Baltit and Altit, with Rakaposhi towering above it all.</div>
+          <a href="packages.html" class="dest-card-link">Explore Packages <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="dest-card filterable reveal delay-2" data-cat="hunza">
+        <div class="dest-card-img">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQH0OMXi7BuqP9-mrpng-N5ZzzhO8bhmPZ5Q&s" alt="Attabad Lake" />
+          <div class="dest-card-img-overlay"></div>
+          <div class="dest-badge">2,600 m elevation</div>
+        </div>
+        <div class="dest-card-info">
+          <div class="dest-card-name">Attabad Lake</div>
+          <div class="dest-card-desc">A geological accident of breathtaking beauty — impossibly turquoise water set against raw granite cliffs. Boat rides, kayaking, and shoreline walks await.</div>
+          <a href="packages.html" class="dest-card-link">Explore Packages <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="dest-card filterable reveal delay-3" data-cat="skardu">
+        <div class="dest-card-img">
+          <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Skardu Valley" />
+          <div class="dest-card-img-overlay"></div>
+          <div class="dest-badge">2,228 m elevation</div>
+        </div>
+        <div class="dest-card-info">
+          <div class="dest-card-name">Skardu Valley</div>
+          <div class="dest-card-desc">Gateway to the world's greatest concentration of high peaks — K2, Broad Peak, Gasherbrum. Ancient Kharpocho Fort watches over a valley carved by glaciers over millennia.</div>
+          <a href="packages.html" class="dest-card-link">Explore Packages <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="dest-card filterable reveal delay-1" data-cat="skardu">
+        <div class="dest-card-img">
+          <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=800&q=80" alt="Deosai Plains" />
+          <div class="dest-card-img-overlay"></div>
+          <div class="dest-badge">4,115 m elevation</div>
+        </div>
+        <div class="dest-card-info">
+          <div class="dest-card-name">Deosai Plains</div>
+          <div class="dest-card-desc">The roof of the world in summer — a high-altitude plateau blanketed in wildflowers, home to brown bears, golden marmots, and skies that go on forever.</div>
+          <a href="packages.html" class="dest-card-link">Explore Packages <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="dest-card filterable reveal delay-2" data-cat="nagar">
+        <div class="dest-card-img">
+          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80" alt="Nagar Valley" />
+          <div class="dest-card-img-overlay"></div>
+          <div class="dest-badge">2,400 m elevation</div>
+        </div>
+        <div class="dest-card-info">
+          <div class="dest-card-name">Nagar Valley</div>
+          <div class="dest-card-desc">Less visited and more intimate than Hunza, Nagar offers terraced apricot orchards, traditional stone villages, and the awe-inspiring Hispar Glacier at its head.</div>
+          <a href="packages.html" class="dest-card-link">Explore Packages <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="dest-card filterable reveal delay-3" data-cat="gilgit">
+        <div class="dest-card-img">
+          <img src="data:image/jpeg;base64,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" alt="Naltar Valley" />
+          <div class="dest-card-img-overlay"></div>
+          <div class="dest-badge">2,898 m elevation</div>
+        </div>
+        <div class="dest-card-info">
+          <div class="dest-card-name">Naltar Valley</div>
+          <div class="dest-card-desc">Three colour-shifting alpine lakes, pine forests, and some of Pakistan's finest skiing in winter. A hidden gem that rewards those who venture off the main Karakoram Highway.</div>
+          <a href="packages.html" class="dest-card-link">Explore Packages <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURED DESTINATION -->
+  <section class="dest-feature">
+    <div class="dest-feature-grid">
+      <div class="dest-feature-img reveal-left">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80" alt="Hunza Feature" />
+      </div>
+      <div class="dest-feature-text reveal-right">
+        <span class="section-tag">Featured Destination</span>
+        <h2 class="section-title">Hunza Valley — The <em>Crown Jewel</em></h2>
+        <p>There is a reason Hunza appears on every serious traveler's list. The valley stretches along the Hunza River, flanked on all sides by some of the world's most dramatic peaks. Rakaposhi, Ultar Sar, and Lady Finger pierce the sky above terrace fields that have fed the famously long-lived Hunzakuts for centuries.</p>
+        <p>Spring brings the famous blossom season when apricot and cherry trees paint the valley in white and pink. Summer opens the high passes. Autumn turns the poplar trees gold. Even winter has a quiet magic of its own.</p>
+        <div class="dest-feature-stats">
+          <div class="dest-stat"><span class="dest-stat-num">7,788m</span><span class="dest-stat-label">Rakaposhi Peak</span></div>
+          <div class="dest-stat"><span class="dest-stat-num">900+</span><span class="dest-stat-label">Years of History</span></div>
+          <div class="dest-stat"><span class="dest-stat-num">Apr–Oct</span><span class="dest-stat-label">Best Season</span></div>
+        </div>
+        <a href="packages.html" class="btn-primary"><span>See Hunza Packages</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="cta-banner-bg"></div>
+    <div class="cta-banner-content">
+      <h2 class="cta-banner-title reveal">Not Sure Where to Go? <em>We'll Help.</em></h2>
+      <p class="cta-banner-text reveal">Tell us your travel dates, interests, and budget. Our team will craft a custom itinerary just for you — at no extra charge.</p>
+      <div class="hero-buttons reveal">
+        <a href="contact.html" class="btn-primary"><span>Talk to an Expert</span></a>
+        <a href="packages.html" class="btn-outline">Browse All Packages</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="footer-logo">HNS <span>Travels</span></a>
+        <p>Hunza. Nagar. Skardu. Three words that have called adventurers, dreamers, and wanderers for centuries.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><ul class="footer-links">
+        <li><a href="destinations.html"><i class="fas fa-chevron-right"></i> Destinations</a></li>
+        <li><a href="packages.html"><i class="fas fa-chevron-right"></i> Packages</a></li>
+        <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+        <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Journal</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul class="footer-links">
+        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+        <li><a href="team.html"><i class="fas fa-chevron-right"></i> Our Team</a></li>
+        <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+92 300 1234567</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>hello@hnstravels.pk</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 HNS Travels. All rights reserved.</p></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

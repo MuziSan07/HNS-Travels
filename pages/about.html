@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — HNS Travels</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .mission-section { padding: 120px 60px; background: var(--white); }
+    .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1300px; margin: 0 auto; }
+    .mission-text .section-title { margin-bottom: 28px; }
+    .mission-body { font-size: 0.9rem; color: var(--text-light); line-height: 1.9; margin-bottom: 20px; }
+    .values-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 40px; }
+    .value-item { padding: 28px; border-left: 2px solid var(--secondary); background: var(--light); }
+    .value-item h4 { font-family: var(--font-heading); font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; }
+    .value-item p { font-size: 0.8rem; color: var(--text-light); line-height: 1.7; }
+    .mission-visual { position: relative; height: 600px; }
+    .mission-visual img { width: 100%; height: 100%; object-fit: cover; }
+
+    .team-section { padding: 120px 60px; background: var(--light); }
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1300px; margin: 60px auto 0; }
+    .team-card { text-align: center; cursor: none; }
+    .team-card-img { width: 100%; height: 280px; overflow: hidden; position: relative; margin-bottom: 24px; }
+    .team-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(30%); }
+    .team-card:hover .team-card-img img { transform: scale(1.05); filter: grayscale(0%); }
+    .team-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,31,23,0.5) 0%, transparent 50%); }
+    .team-name { font-family: var(--font-heading); font-size: 1.2rem; color: var(--primary); margin-bottom: 4px; }
+    .team-role { font-family: var(--font-sans); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary); margin-bottom: 12px; }
+    .team-bio { font-size: 0.78rem; color: var(--text-light); line-height: 1.7; }
+
+    .story-timeline { padding: 120px 60px; background: var(--dark); }
+    .story-timeline .section-title { color: var(--white); }
+    .timeline { position: relative; max-width: 900px; margin: 60px auto 0; }
+    .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(200,169,110,0.3); transform: translateX(-50%); }
+    .timeline-item { display: flex; gap: 60px; margin-bottom: 60px; position: relative; }
+    .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+    .timeline-year { font-family: var(--font-display); font-size: 2rem; color: var(--secondary); min-width: 100px; text-align: right; line-height: 1; padding-top: 5px; }
+    .timeline-item:nth-child(even) .timeline-year { text-align: left; }
+    .timeline-dot { width: 12px; height: 12px; background: var(--secondary); border-radius: 50%; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); }
+    .timeline-content { flex: 1; }
+    .timeline-content h4 { font-family: var(--font-heading); font-size: 1.1rem; color: var(--white); margin-bottom: 10px; }
+    .timeline-content p { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+    @media (max-width: 900px) {
+      .mission-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline::before { left: 20px; }
+      .timeline-item { flex-direction: column !important; padding-left: 50px; }
+      .timeline-dot { left: 20px; }
+      .timeline-year { text-align: left !important; }
+    }
+    @media (max-width: 600px) {
+      .mission-section, .team-section, .story-timeline { padding: 80px 24px; }
+      .team-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursor-dot"></div>
+  <button id="back-to-top"><i class="fas fa-arrow-up"></i></button>
+
+  <nav id="navbar">
+    <a href="../index.html" class="nav-logo"><img src="../static/img/logo/HNS_Travels.png" alt="HNS Travels" class="nav-logo-img" /></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html">Journal</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a><a href="about.html">About</a><a href="destinations.html">Destinations</a>
+    <a href="packages.html">Packages</a><a href="gallery.html">Gallery</a><a href="blog.html">Journal</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Book Now</a>
+  </div>
+
+    <div class="page-hero">
+    <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">Our <em>Story</em></h1>
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span>About Us</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <section class="story-timeline">
+    <div style="max-width:1300px;margin:0 auto;text-align:center;">
+      <span class="section-tag">Our Journey</span>
+      <h2 class="section-title">Milestones Along the <em>Way</em></h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2009</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>The Beginning</h4>
+          <p>Founded by three Hunzakut guides with a single jeep, HNS Travels completed its first official tour — a 7-day Hunza circuit for a group of travelers from Karachi.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2012</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Expanding to Skardu</h4>
+          <p>We extended our operations to Baltistan, launching our first Skardu and Deosai packages and establishing partnerships with local guesthouses and camps.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2015</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>1,000 Travelers Milestone</h4>
+          <p>A proud moment — our 1,000th traveler completed their journey with HNS. We marked the occasion by planting 1,000 trees across the Hunza and Nagar valleys.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2018</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>International Recognition</h4>
+          <p>HNS Travels was featured in Lonely Planet and National Geographic Traveler, bringing a wave of international visitors to Pakistan's north.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Responsible Tourism Pledge</h4>
+          <p>We formalized our commitment to sustainable tourism, launching the HNS Green Fund and pledging 5% of all revenue to local conservation and education projects.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Today &amp; Beyond</h4>
+          <p>Over 4,800 travelers guided. 38 tour routes. And the same fire burning that started on a mountain road in Karimabad in 2009. The best is yet to come.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <div style="max-width:1300px;margin:0 auto;text-align:center;">
+      <span class="section-tag">The People Behind the Journey</span>
+      <h2 class="section-title">Meet Our <em>Team</em></h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal delay-1">
+        <div class="team-card-img"><img src="https://i.pravatar.cc/300?img=11" alt="Faisal Karim" /></div>
+        <div class="team-name">Faisal Karim</div>
+        <div class="team-role">Founder &amp; Lead Guide</div>
+        <p class="team-bio">Born in Karimabad, Faisal has spent 20 years navigating every trail in the north. His knowledge of local culture and terrain is unmatched.</p>
+      </div>
+      <div class="team-card reveal delay-2">
+        <div class="team-card-img"><img src="https://i.pravatar.cc/300?img=25" alt="Sana Mirza" /></div>
+        <div class="team-name">Sana Mirza</div>
+        <div class="team-role">Operations Director</div>
+        <p class="team-bio">Sana ensures every journey runs like clockwork, from hotel bookings to emergency protocols. The quiet force that makes the magic happen.</p>
+      </div>
+      <div class="team-card reveal delay-3">
+        <div class="team-card-img"><img src="https://i.pravatar.cc/300?img=15" alt="Imran Baig" /></div>
+        <div class="team-name">Imran Baig</div>
+        <div class="team-role">Senior Mountain Guide</div>
+        <p class="team-bio">Certified high-altitude guide and Skardu native. Imran has reached K2 Base Camp over 30 times and still finds something new each visit.</p>
+      </div>
+      <div class="team-card reveal delay-4">
+        <div class="team-card-img"><img src="https://i.pravatar.cc/300?img=47" alt="Hina Shah" /></div>
+        <div class="team-name">Hina Shah</div>
+        <div class="team-role">Cultural Experience Lead</div>
+        <p class="team-bio">A cultural anthropologist and passionate storyteller, Hina designs authentic local experiences that bring the history of the north to life.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="cta-banner-bg"></div>
+    <div class="cta-banner-content">
+      <h2 class="cta-banner-title reveal">Ready to Write Your <em>Mountain Story</em>?</h2>
+      <p class="cta-banner-text reveal">Join thousands of travelers who have trusted HNS to guide them through the most spectacular landscapes in the world. Your journey begins with a single step.</p>
+      <div class="hero-buttons reveal">
+        <a href="contact.html" class="btn-primary"><span>Plan My Trip</span></a>
+        <a href="packages.html" class="btn-outline">View Packages</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="footer-logo">HNS <span>Travels</span></a>
+        <p>Hunza. Nagar. Skardu. Three words that have called adventurers, dreamers, and wanderers for centuries.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="destinations.html"><i class="fas fa-chevron-right"></i> Destinations</a></li>
+          <li><a href="packages.html"><i class="fas fa-chevron-right"></i> Packages</a></li>
+          <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+          <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Journal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="team.html"><i class="fas fa-chevron-right"></i> Our Team</a></li>
+          <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+92 300 1234567</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>hello@hnstravels.pk</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 HNS Travels. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Journal — HNS Travels</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .blog-section { padding: 90px 60px; background: var(--white); }
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; max-width: 1300px; margin: 60px auto 0; }
+    .blog-card { cursor: none; transition: var(--transition); }
+    .blog-card:hover { transform: translateY(-6px); }
+    .blog-card-img { height: 260px; overflow: hidden; position: relative; }
+    .blog-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .blog-card:hover .blog-card-img img { transform: scale(1.05); }
+    .blog-category { position: absolute; top: 20px; left: 20px; background: var(--secondary); color: var(--dark); font-family: var(--font-sans); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 14px; }
+    .blog-body { padding: 28px 0; border-bottom: 1px solid rgba(0,0,0,0.07); }
+    .blog-meta { display: flex; gap: 16px; margin-bottom: 14px; }
+    .blog-meta span { font-family: var(--font-sans); font-size: 0.65rem; color: var(--text-light); letter-spacing: 0.1em; display: flex; align-items: center; gap: 6px; }
+    .blog-meta i { color: var(--secondary); font-size: 0.6rem; }
+    .blog-title { font-family: var(--font-heading); font-size: 1.3rem; color: var(--primary); margin-bottom: 14px; line-height: 1.3; transition: color 0.3s; }
+    .blog-card:hover .blog-title { color: var(--primary-light); }
+    .blog-excerpt { font-size: 0.82rem; color: var(--text-light); line-height: 1.7; margin-bottom: 22px; }
+    .blog-read { font-family: var(--font-sans); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+    .blog-read i { transition: transform 0.3s; }
+    .blog-card:hover .blog-read i { transform: translateX(5px); }
+    .blog-featured { padding: 0 60px 90px; max-width: 1300px; margin: 0 auto; }
+    .blog-featured-card { display: grid; grid-template-columns: 1.2fr 1fr; overflow: hidden; cursor: none; background: var(--light); }
+    .blog-featured-card .blog-card-img { height: 100%; min-height: 440px; }
+    .blog-featured-content { padding: 60px 50px; display: flex; flex-direction: column; justify-content: center; }
+    .blog-featured-content .blog-title { font-size: 2rem; }
+    @media (max-width: 1100px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px) { .blog-grid { grid-template-columns: 1fr; } .blog-section, .blog-featured { padding-left: 24px; padding-right: 24px; } .blog-featured-card { grid-template-columns: 1fr; } .blog-featured-card .blog-card-img { min-height: 260px; } }
+  </style>
+</head>
+<body>
+  <button id="back-to-top"><i class="fas fa-arrow-up"></i></button>
+  <nav id="navbar">
+    <a href="../index.html" class="nav-logo"><img src="../static/img/logo/HNS_Travels.png" alt="HNS Travels" class="nav-logo-img" /></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="destinations.html">Destinations</a></li><li><a href="packages.html">Packages</a></li>
+      <li><a href="gallery.html">Gallery</a></li><li><a href="blog.html">Journal</a></li>
+      <li><a href="faq.html">FAQ</a></li><li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a><a href="about.html">About</a><a href="destinations.html">Destinations</a>
+    <a href="packages.html">Packages</a><a href="gallery.html">Gallery</a><a href="blog.html">Journal</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Book Now</a>
+  </div>
+
+    <div class="page-hero">
+    <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1471922694854-ff1b63b8b67d?auto=format&fit=crop&w=1920&q=80');"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">Mountain <em>Journal</em></h1>
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span>Journal</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="blog-section" style="padding-top:60px;">
+    <div style="max-width:1300px;margin:0 auto;">
+      <span class="section-tag reveal">Latest from the Journal</span>
+      <h2 class="section-title reveal">Stories from the <em>North</em></h2>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card reveal delay-1">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Deosai" />
+          <div class="blog-category">Skardu</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> March 28, 2025</span><span><i class="fas fa-clock"></i> 8 min read</span></div>
+          <h3 class="blog-title">Deosai: Spending Three Nights on the Roof of the World</h3>
+          <p class="blog-excerpt">The Deosai Plains are unlike any other place in Pakistan. At over 4,000 meters, this vast plateau is a world of its own — endless sky, wildflowers, and the distant rumble of thunder.</p>
+          <a href="#" class="blog-read">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal delay-2">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" alt="Attabad" />
+          <div class="blog-category">Lakes</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> March 10, 2025</span><span><i class="fas fa-clock"></i> 6 min read</span></div>
+          <h3 class="blog-title">Kayaking Attabad Lake: Everything You Need to Know</h3>
+          <p class="blog-excerpt">The turquoise waters of Attabad Lake are perhaps the most photogenic spot in all of Pakistan. Here is our complete guide to getting on the water — including the best rental spots and time of day.</p>
+          <a href="#" class="blog-read">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal delay-3">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1439853994265-d586d5d09abb?auto=format&fit=crop&w=800&q=80" alt="Baltit Fort" />
+          <div class="blog-category">Culture</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> February 22, 2025</span><span><i class="fas fa-clock"></i> 10 min read</span></div>
+          <h3 class="blog-title">Inside Baltit Fort: 700 Years of Hunza History</h3>
+          <p class="blog-excerpt">Perched on a rocky spur above Karimabad, Baltit Fort has watched over Hunza for seven centuries. We spent a day exploring every chamber, corridor, and rooftop with a historian from the valley.</p>
+          <a href="#" class="blog-read">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal delay-1">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="KKH" />
+          <div class="blog-category">Road Trip</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> February 5, 2025</span><span><i class="fas fa-clock"></i> 12 min read</span></div>
+          <h3 class="blog-title">The Karakoram Highway: The Greatest Road on Earth</h3>
+          <p class="blog-excerpt">The KKH connects China and Pakistan through some of the most dramatic mountain terrain on the planet. Here is what to expect on the journey from Islamabad to Hunza and beyond.</p>
+          <a href="#" class="blog-read">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal delay-2">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=800&q=80" alt="Food" />
+          <div class="blog-category">Food &amp; Culture</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> January 18, 2025</span><span><i class="fas fa-clock"></i> 7 min read</span></div>
+          <h3 class="blog-title">What to Eat in Hunza: A Food Lover's Field Guide</h3>
+          <p class="blog-excerpt">From the iconic chapshuro flatbreads to glacier-cold apricot juice and the warming bowls of diram phitti, Hunza cuisine is a revelation. Here is where to eat and what to order.</p>
+          <a href="#" class="blog-read">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal delay-3">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80" alt="Trekking" />
+          <div class="blog-category">Trekking</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> January 3, 2025</span><span><i class="fas fa-clock"></i> 9 min read</span></div>
+          <h3 class="blog-title">Rakaposhi Base Camp: A Trek for All Levels</h3>
+          <p class="blog-excerpt">Standing beneath Rakaposhi — the 27th highest mountain on earth — is a humbling, life-affirming experience. The trek to its base camp is accessible to most fit walkers. Here is exactly how to do it.</p>
+          <a href="#" class="blog-read">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner" style="padding:100px 60px;">
+    <div class="cta-banner-bg"></div>
+    <div class="cta-banner-content">
+      <h2 class="cta-banner-title reveal">Ready to Write Your Own <em>Mountain Story</em>?</h2>
+      <div class="hero-buttons reveal"><a href="contact.html" class="btn-primary"><span>Book a Journey</span></a></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="../index.html" class="footer-logo">HNS <span>Travels</span></a><p>Stories from the world's highest roads and deepest valleys.</p>
+        <div class="footer-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+      </div>
+      <div class="footer-col"><h4>Quick Links</h4><ul class="footer-links">
+        <li><a href="../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+        <li><a href="packages.html"><i class="fas fa-chevron-right"></i> Packages</a></li>
+        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Book Now</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+92 300 1234567</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>hello@hnstravels.pk</span></div>
+      </div>
+      <div class="footer-col"></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 HNS Travels. All rights reserved.</p></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

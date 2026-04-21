@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tour Packages — HNS Travels</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .packages-intro { padding: 80px 60px 40px; background: var(--white); text-align: center; }
+    .packages-intro p { max-width: 680px; margin: 20px auto 0; font-size: 0.88rem; color: var(--text-light); line-height: 1.9; }
+
+    .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; padding: 0 60px 60px; background: var(--white); }
+    .filter-tab { font-family: var(--font-sans); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 10px 24px; border: 1px solid rgba(26,58,42,0.2); background: transparent; color: var(--text); cursor: none; transition: all 0.3s ease; }
+    .filter-tab.active, .filter-tab:hover { background: var(--primary); color: var(--secondary); border-color: var(--primary); }
+
+    .packages-grid-section { padding: 0 60px 120px; background: var(--white); }
+    .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; max-width: 1300px; margin: 0 auto; }
+
+    .pkg-card { background: var(--white); border: 1px solid rgba(26,58,42,0.08); overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease; cursor: none; display: flex; flex-direction: column; }
+    .pkg-card:hover { transform: translateY(-10px); box-shadow: 0 30px 70px rgba(13,31,23,0.14); }
+    .pkg-img { width: 100%; height: 260px; overflow: hidden; position: relative; }
+    .pkg-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+    .pkg-card:hover .pkg-img img { transform: scale(1.07); }
+    .pkg-badge { position: absolute; top: 16px; left: 16px; background: var(--secondary); color: var(--dark); font-family: var(--font-sans); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 12px; font-weight: 600; }
+    .pkg-badge.premium { background: var(--primary); color: var(--secondary); }
+    .pkg-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+    .pkg-title { font-family: var(--font-heading); font-size: 1.3rem; color: var(--primary); margin-bottom: 10px; }
+    .pkg-meta { display: flex; gap: 20px; margin-bottom: 16px; }
+    .pkg-meta span { font-family: var(--font-sans); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); display: flex; align-items: center; gap: 6px; }
+    .pkg-meta span i { color: var(--secondary); }
+    .pkg-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.8; margin-bottom: 20px; flex: 1; }
+    .pkg-highlights { margin-bottom: 24px; }
+    .pkg-highlights li { font-size: 0.78rem; color: var(--text); line-height: 1.7; padding-left: 16px; position: relative; margin-bottom: 4px; list-style: none; }
+    .pkg-highlights li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; background: var(--secondary); }
+    .pkg-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; border-top: 1px solid rgba(26,58,42,0.08); margin-top: auto; }
+    .pkg-price { font-family: var(--font-display); font-size: 1.6rem; color: var(--primary); }
+    .pkg-price span { font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); display: block; }
+    .pkg-cta { font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 10px 20px; background: var(--primary); color: var(--secondary); text-decoration: none; transition: all 0.3s ease; cursor: none; }
+    .pkg-cta:hover { background: var(--secondary); color: var(--dark); }
+
+    .packages-why { padding: 100px 60px; background: var(--dark); }
+    .packages-why .section-title { color: var(--white); text-align: center; margin-bottom: 60px; }
+    .why-grid-pkg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1300px; margin: 0 auto; }
+    .why-item-pkg { text-align: center; padding: 36px 24px; border: 1px solid rgba(200,169,110,0.12); transition: border-color 0.3s ease; }
+    .why-item-pkg:hover { border-color: rgba(200,169,110,0.4); }
+    .why-item-pkg i { font-size: 1.6rem; color: var(--secondary); margin-bottom: 20px; display: block; }
+    .why-item-pkg h4 { font-family: var(--font-heading); font-size: 1rem; color: var(--white); margin-bottom: 12px; }
+    .why-item-pkg p { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    @media (max-width: 1100px) { .packages-grid { grid-template-columns: repeat(2, 1fr); } .why-grid-pkg { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px) { .packages-grid { grid-template-columns: 1fr; } .packages-intro, .filter-bar, .packages-grid-section, .packages-why { padding-left: 24px; padding-right: 24px; } }
+
+    /* ✅ THIS IS THE ONLY LINE THAT WAS ADDED — makes hero image visible like Destinations page */
+    .page-hero-bg::after { opacity: 0.45; }
+
+  </style>
+</head>
+<body>
+
+  <div id="cursor-dot"></div>
+  <button id="back-to-top"><i class="fas fa-arrow-up"></i></button>
+
+  <nav id="navbar">
+    <a href="../index.html" class="nav-logo"><img src="../static/img/logo/HNS_Travels.png" alt="HNS Travels" class="nav-logo-img" /></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html">Journal</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a><a href="about.html">About</a><a href="destinations.html">Destinations</a>
+    <a href="packages.html">Packages</a><a href="gallery.html">Gallery</a><a href="blog.html">Journal</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Book Now</a>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">Our <em>Story</em></h1>
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span>About Us</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="packages-intro reveal">
+    <span class="section-tag">Curated for Every Traveler</span>
+    <h2 class="section-title">Choose Your <em>Adventure</em></h2>
+    <p>From gentle valley tours to world-class high-altitude expeditions, every HNS package is crafted with local expertise, reliable logistics, and a genuine love for the north. All prices are per person, based on double occupancy.</p>
+  </section>
+
+  <!-- FILTERS -->
+  <div class="filter-bar reveal">
+    <button class="filter-tab active" data-filter="all">All Packages</button>
+    <button class="filter-tab" data-filter="classic">Classic</button>
+    <button class="filter-tab" data-filter="adventure">Adventure</button>
+    <button class="filter-tab" data-filter="premium">Premium</button>
+    <button class="filter-tab" data-filter="family">Family</button>
+  </div>
+
+  <!-- GRID -->
+  <section class="packages-grid-section">
+    <div class="packages-grid">
+
+      <!-- 1 -->
+      <div class="pkg-card filterable reveal delay-1" data-cat="family">
+        <div class="pkg-img">
+          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=700&q=80" alt="Family Hunza Escape" />
+          <div class="pkg-badge">Family</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-title">Family Hunza Escape</div>
+          <div class="pkg-meta">
+            <span><i class="fas fa-clock"></i> 5 Days</span>
+            <span><i class="fas fa-map-marker-alt"></i> Hunza</span>
+            <span><i class="fas fa-users"></i> 2–12 Pax</span>
+          </div>
+          <p class="pkg-desc">A relaxed family-friendly tour through Hunza valley. Gentle walks, fort visits, local food experiences, and a boat ride on Attabad Lake.</p>
+          <ul class="pkg-highlights">
+            <li>Baltit &amp; Altit Fort guided tours</li>
+            <li>Attabad Lake boat excursion</li>
+            <li>Local family home dinner</li>
+            <li>Eagle's Nest viewpoint sunset</li>
+          </ul>
+          <div class="pkg-footer">
+            <div class="pkg-price">PKR 38,000 <span>per person</span></div>
+            <a href="contact.html" class="pkg-cta">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="pkg-card filterable reveal delay-2" data-cat="classic">
+        <div class="pkg-img">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=700&q=80" alt="Hunza Classic" />
+          <div class="pkg-badge">Classic</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-title">Hunza Classic</div>
+          <div class="pkg-meta">
+            <span><i class="fas fa-clock"></i> 7 Days</span>
+            <span><i class="fas fa-map-marker-alt"></i> Hunza</span>
+            <span><i class="fas fa-users"></i> 1–15 Pax</span>
+          </div>
+          <p class="pkg-desc">The definitive Hunza experience. Ancient forts, glacial viewpoints, cherry blossom walks, and the warmth of true Hunzakut hospitality.</p>
+          <ul class="pkg-highlights">
+            <li>Full valley circuit by jeep</li>
+            <li>Passu Cones trek (moderate)</li>
+            <li>Rakaposhi base viewpoint</li>
+            <li>Karimabad bazaar &amp; local craft shopping</li>
+          </ul>
+          <div class="pkg-footer">
+            <div class="pkg-price">PKR 45,000 <span>per person</span></div>
+            <a href="contact.html" class="pkg-cta">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="pkg-card filterable reveal delay-3" data-cat="classic">
+        <div class="pkg-img">
+          <img src="https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?auto=format&fit=crop&w=700&q=80" alt="Lakes of the North" />
+          <div class="pkg-badge">Classic</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-title">Lakes of the North</div>
+          <div class="pkg-meta">
+            <span><i class="fas fa-clock"></i> 6 Days</span>
+            <span><i class="fas fa-map-marker-alt"></i> Hunza + Gilgit</span>
+            <span><i class="fas fa-users"></i> 2–10 Pax</span>
+          </div>
+          <p class="pkg-desc">A lakes-focused tour covering Attabad, Naltar, and the hidden alpine lakes of Gilgit-Baltistan. Perfect for photographers and nature lovers.</p>
+          <ul class="pkg-highlights">
+            <li>Attabad Lake kayaking &amp; boat ride</li>
+            <li>Naltar Valley 3-lake hike</li>
+            <li>Rush Lake base approach</li>
+            <li>Sunset photography session with guide</li>
+          </ul>
+          <div class="pkg-footer">
+            <div class="pkg-price">PKR 52,000 <span>per person</span></div>
+            <a href="contact.html" class="pkg-cta">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="pkg-card filterable reveal delay-1" data-cat="adventure">
+        <div class="pkg-img">
+          <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=700&q=80" alt="Skardu Odyssey" />
+          <div class="pkg-badge">Adventure</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-title">Skardu Odyssey</div>
+          <div class="pkg-meta">
+            <span><i class="fas fa-clock"></i> 8 Days</span>
+            <span><i class="fas fa-map-marker-alt"></i> Skardu</span>
+            <span><i class="fas fa-users"></i> 2–12 Pax</span>
+          </div>
+          <p class="pkg-desc">Skardu is in a class of its own. Kharpocho Fort, Deosai Plains, Shangrila Resort, and the gateway to the Karakoram's highest peaks.</p>
+          <ul class="pkg-highlights">
+            <li>Deosai Plains full-day excursion</li>
+            <li>Kharpocho Fort &amp; Skardu old town</li>
+            <li>Shangrila Lake boat ride</li>
+            <li>Upper Kachura Lake camping</li>
+          </ul>
+          <div class="pkg-footer">
+            <div class="pkg-price">PKR 70,000 <span>per person</span></div>
+            <a href="contact.html" class="pkg-cta">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="pkg-card filterable reveal delay-2" data-cat="adventure">
+        <div class="pkg-img">
+          <img src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=700&q=80" alt="K2 Base Camp Trek" />
+          <div class="pkg-badge premium">Premium</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-title">K2 Base Camp Trek</div>
+          <div class="pkg-meta">
+            <span><i class="fas fa-clock"></i> 18 Days</span>
+            <span><i class="fas fa-map-marker-alt"></i> Skardu + Karakoram</span>
+            <span><i class="fas fa-users"></i> 2–8 Pax</span>
+          </div>
+          <p class="pkg-desc">The ultimate Karakoram experience — trekking through the Baltoro Glacier to the foot of the world's second highest mountain. A life-defining journey.</p>
+          <ul class="pkg-highlights">
+            <li>Baltoro Glacier full traverse</li>
+            <li>Concordia — throne of the mountain gods</li>
+            <li>K2, Broad Peak, Gasherbrum views</li>
+            <li>Certified high-altitude guide &amp; porter team</li>
+          </ul>
+          <div class="pkg-footer">
+            <div class="pkg-price">PKR 95,000 <span>per person</span></div>
+            <a href="contact.html" class="pkg-cta">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="pkg-card filterable reveal delay-3" data-cat="premium">
+        <div class="pkg-img">
+          <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=700&q=80" alt="Grand Northern Circuit" />
+          <div class="pkg-badge premium">Premium</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-title">Grand Northern Circuit</div>
+          <div class="pkg-meta">
+            <span><i class="fas fa-clock"></i> 14 Days</span>
+            <span><i class="fas fa-map-marker-alt"></i> Hunza + Nagar + Skardu</span>
+            <span><i class="fas fa-users"></i> 2–10 Pax</span>
+          </div>
+          <p class="pkg-desc">The complete north. All three valleys, the great lakes, the ancient forts, the blossom fields, and the roof of the world — in one epic journey.</p>
+          <ul class="pkg-highlights">
+            <li>Full Hunza &amp; Nagar valley circuit</li>
+            <li>Skardu &amp; Deosai exploration</li>
+            <li>Fairy Meadows &amp; Nanga Parbat view</li>
+            <li>Premium guesthouses throughout</li>
+          </ul>
+          <div class="pkg-footer">
+            <div class="pkg-price">PKR 1,20,000 <span>per person</span></div>
+            <a href="contact.html" class="pkg-cta">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHY HNS -->
+  <section class="packages-why">
+    <div style="max-width:1300px;margin:0 auto;text-align:center;">
+      <span class="section-tag reveal" style="color:rgba(200,169,110,0.6);">Why Travel With Us</span>
+      <h2 class="section-title reveal">What Makes HNS <em>Different</em></h2>
+    </div>
+    <div class="why-grid-pkg">
+      <div class="why-item-pkg reveal delay-1">
+        <i class="fas fa-map-marked-alt"></i>
+        <h4>Local Expertise</h4>
+        <p>Every guide is from northern Pakistan. We do not just know the routes — we know the stories, the people, and the hidden places no guidebook mentions.</p>
+      </div>
+      <div class="why-item-pkg reveal delay-2">
+        <i class="fas fa-shield-alt"></i>
+        <h4>Safety First</h4>
+        <p>All guides are certified wilderness first responders. We carry satellite communicators, first aid kits, and follow strict weather and altitude protocols on every trek.</p>
+      </div>
+      <div class="why-item-pkg reveal delay-3">
+        <i class="fas fa-leaf"></i>
+        <h4>Responsible Tourism</h4>
+        <p>We follow Leave No Trace principles, support local guesthouses, and donate 5% of revenue to conservation and community education in the north.</p>
+      </div>
+      <div class="why-item-pkg reveal delay-4">
+        <i class="fas fa-star"></i>
+        <h4>Flexible &amp; Custom</h4>
+        <p>Every itinerary can be tailored. Change dates, extend stays, add side trips — we build trips around you, not the other way around.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="cta-banner-bg"></div>
+    <div class="cta-banner-content">
+      <h2 class="cta-banner-title reveal">Not Sure Which Package? <em>Let us Help.</em></h2>
+      <p class="cta-banner-text reveal">Tell us your dates, interests, and budget. Our team will craft the perfect custom itinerary — at no extra charge.</p>
+      <div class="hero-buttons reveal">
+        <a href="contact.html" class="btn-primary"><span>Talk to an Expert</span></a>
+        <a href="destinations.html" class="btn-outline">Explore Destinations</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="footer-logo">HNS <span>Travels</span></a>
+        <p>Hunza. Nagar. Skardu. Three words that have called adventurers, dreamers, and wanderers for centuries.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><ul class="footer-links">
+        <li><a href="destinations.html"><i class="fas fa-chevron-right"></i> Destinations</a></li>
+        <li><a href="packages.html"><i class="fas fa-chevron-right"></i> Packages</a></li>
+        <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+        <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Journal</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul class="footer-links">
+        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+        <li><a href="team.html"><i class="fas fa-chevron-right"></i> Our Team</a></li>
+        <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+92 300 1234567</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>hello@hnstravels.pk</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 HNS Travels. All rights reserved. &nbsp;|&nbsp; <a href="privacy.html" style="color:rgba(200,169,110,0.6);">Privacy</a> &nbsp;|&nbsp; <a href="terms.html" style="color:rgba(200,169,110,0.6);">Terms</a></p></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

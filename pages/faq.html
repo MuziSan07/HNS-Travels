@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — HNS Travels</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .faq-section { padding: 100px 60px 140px; background: var(--white); max-width: 900px; margin: 0 auto; }
+    .faq-category { margin-bottom: 60px; }
+    .faq-category-title { font-family: var(--font-sans); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--secondary); margin-bottom: 28px; padding-bottom: 12px; border-bottom: 1px solid rgba(200,169,110,0.25); }
+    .faq-item { border-bottom: 1px solid rgba(26,58,42,0.1); }
+    .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; text-align: left; cursor: none; gap: 20px; }
+    .faq-question-text { font-family: var(--font-heading); font-size: 1.05rem; color: var(--primary); line-height: 1.4; }
+    .faq-icon { width: 28px; height: 28px; border: 1px solid rgba(200,169,110,0.4); display: flex; align-items: center; justify-content: center; color: var(--secondary); flex-shrink: 0; transition: transform 0.3s ease, background 0.3s ease; font-size: 0.7rem; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--secondary); color: var(--dark); }
+    .faq-answer { display: none; padding: 0 0 24px 0; }
+    .faq-answer p { font-size: 0.86rem; color: var(--text-light); line-height: 1.9; margin-bottom: 10px; }
+    .faq-answer ul { padding-left: 0; }
+    .faq-answer ul li { font-size: 0.86rem; color: var(--text-light); line-height: 1.8; padding-left: 16px; position: relative; margin-bottom: 6px; }
+    .faq-answer ul li::before { content: '—'; position: absolute; left: 0; color: var(--secondary); }
+    .faq-footer { text-align: center; margin-top: 80px; padding: 60px; background: var(--light); }
+    .faq-footer h3 { font-family: var(--font-heading); font-size: 1.6rem; color: var(--primary); margin-bottom: 16px; }
+    .faq-footer p { font-size: 0.88rem; color: var(--text-light); margin-bottom: 36px; line-height: 1.8; }
+    @media (max-width: 600px) { .faq-section { padding: 80px 24px 100px; } }
+  </style>
+</head>
+<body>
+
+  <div id="cursor-dot"></div>
+  <button id="back-to-top"><i class="fas fa-arrow-up"></i></button>
+
+  <nav id="navbar">
+    <a href="../index.html" class="nav-logo"><img src="../static/img/logo/HNS_Travels.png" alt="HNS Travels" class="nav-logo-img" /></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html">Journal</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a><a href="about.html">About</a><a href="destinations.html">Destinations</a>
+    <a href="packages.html">Packages</a><a href="gallery.html">Gallery</a><a href="blog.html">Journal</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Book Now</a>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d1b22efd463b?auto=format&fit=crop&w=1920&q=80');"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">Frequently Asked <em>Questions</em></h1>
+      <div class="breadcrumb"><a href="../index.html">Home</a><span>/</span><span>FAQ</span></div>
+    </div>
+  </div>
+
+  <div style="max-width:900px;margin:0 auto;padding:80px 60px 0;text-align:center;" class="reveal">
+    <span class="section-tag">Everything You Need to Know</span>
+    <h2 class="section-title" style="margin-bottom:16px;">Your Questions, <em>Answered</em></h2>
+    <p style="font-size:0.88rem;color:var(--text-light);line-height:1.9;max-width:600px;margin:0 auto;">We have compiled answers to the questions we hear most often. If you do not find your answer here, <a href="contact.html" style="color:var(--secondary);">contact our team</a> directly and we will respond within 24 hours.</p>
+  </div>
+
+  <section class="faq-section">
+
+    <!-- PLANNING -->
+    <div class="faq-category">
+      <div class="faq-category-title">Planning Your Trip</div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span class="faq-question-text">When is the best time to visit Hunza, Nagar, and Skardu?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>Each season offers something different. The most popular times are:</p>
+          <ul>
+            <li><strong>Spring (March–May):</strong> Famous blossom season in Hunza. Apricot and cherry trees bloom, creating stunning pink-and-white landscapes. Ideal for photography and valley touring.</li>
+            <li><strong>Summer (June–August):</strong> High passes open, ideal for K2 Base Camp and Concordia treks. Warm days with cool nights. Longer daylight hours for hiking.</li>
+            <li><strong>Autumn (September–October):</strong> Poplar trees turn golden, skies are crystal clear, and crowds thin out. Many consider this the most beautiful season.</li>
+            <li><strong>Winter (November–February):</strong> Cold and some roads close, but the landscape is magical. Suitable for cultural tours and Naltar skiing.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span class="faq-question-text">Do I need a permit to visit Hunza, Skardu, or trek in the area?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>General tourism to Hunza, Nagar, and Skardu does not require a special permit for Pakistani nationals or most foreign visitors. However, high-altitude trekking routes do require permits:</p>
+          <ul>
+            <li>K2 Base Camp and Concordia Trek: Restricted Zone Permit required</li>
+            <li>Deosai National Park: Entry fee and conservation permit required</li>
+            <li>Certain military-proximity areas: NOC (No Objection Certificate) may be needed</li>
+          </ul>
+          <p>HNS Travels handles all permit applications on your behalf as part of your package. Just provide your passport details and we take care of the rest.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span class="faq-question-text">How fit do I need to be for the tours?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>It depends on the tour. Our valley and cultural tours (Hunza Classic, Family Getaway) require only moderate fitness — comfortable walking on uneven terrain for 2–4 hours daily. Our trekking packages, especially K2 Base Camp, require good cardiovascular fitness and prior trekking experience. We always recommend consulting your doctor before high-altitude trips and allow extra acclimatization days in our itineraries.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span class="faq-question-text">What is the best way to get to Hunza or Skardu?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>There are two main ways:</p>
+          <ul>
+            <li><strong>By Air:</strong> PIA operates flights to Gilgit and Skardu from Islamabad. Flight time is approximately 45 minutes but is highly weather-dependent — delays and cancellations are common. Book flexible tickets.</li>
+            <li><strong>By Road:</strong> The Karakoram Highway (KKH) from Islamabad to Gilgit/Hunza takes 12–18 hours by bus or car. The KKH is one of the world's great road journeys. We recommend private transport for comfort and flexibility.</li>
+          </ul>
+          <p>Our packages include transportation from Islamabad, so you do not need to arrange anything yourself.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOKING -->
+    <div class="faq-category">
+      <div class="faq-category-title">Booking &amp; Payments</div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span class="faq-question-text">How do I book a tour with HNS Travels?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>You can book via our Contact page by filling out the inquiry form — mention your preferred package, travel dates, and group size. Our team will get back to you within 24 hours with a detailed quote and itinerary. Once confirmed, a 30% deposit secures your booking. The remaining balance is due 21 days before departure.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span class="faq-question-text">What is your cancellation policy?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>Cancellations made more than 45 days before departure forfeit only the 30% deposit. Between 30–44 days: 50% charge. Between 15–29 days: 75% charge. Less than 15 days: no refund. In the rare case we cancel a tour due to force majeure (severe weather, civil unrest), a full refund or free rescheduling is offered. Full details are in our Terms &amp; Conditions.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span class="faq-question-text">Can I customize a package or build my own itinerary?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>Absolutely. Custom itineraries are one of our specialties. Tell us your interests (photography, culture, trekking, relaxation), your available dates, group size, and budget — we will design a unique tour just for you. There is no extra fee for custom planning.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICAL -->
+    <div class="faq-category">
+      <div class="faq-category-title">Practical &amp; On-Ground</div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span class="faq-question-text">Is mobile coverage available throughout the tour?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>Major towns (Gilgit, Karimabad, Skardu) have reasonable Telenor and Jazz coverage. Remote valleys and trek routes are mostly off-grid. We recommend downloading offline maps and informing family of your itinerary before departure. Our guides carry satellite communicators on all high-altitude treks.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span class="faq-question-text">What is the food like? Can dietary requirements be accommodated?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>Northern Pakistani cuisine is delicious and varied — fresh bread, apricot products, dumplings, mountain trout, and hearty stews. On valley tours, meals are at local guesthouses and restaurants. On treks, our cooks prepare fresh meals at camp. We can accommodate vegetarian, vegan, and most dietary requirements — just inform us when booking. Halal food is standard throughout.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span class="faq-question-text">Do I need travel insurance?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>We strongly recommend comprehensive travel insurance that includes emergency medical evacuation coverage. Helicopter evacuation from high-altitude areas can cost USD 5,000–20,000 without insurance. HNS Travels does not provide insurance but can recommend reputable providers. All trekking permits require proof of insurance for high-altitude routes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-footer reveal">
+      <h3>Still Have Questions?</h3>
+      <p>Our team is available 7 days a week to answer anything you need — from visa queries to packing lists to altitude advice.</p>
+      <a href="contact.html" class="btn-primary"><span>Contact Our Team</span></a>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="footer-logo">HNS <span>Travels</span></a>
+        <p>Hunza. Nagar. Skardu. Three words that have called adventurers, dreamers, and wanderers for centuries.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><ul class="footer-links">
+        <li><a href="destinations.html"><i class="fas fa-chevron-right"></i> Destinations</a></li>
+        <li><a href="packages.html"><i class="fas fa-chevron-right"></i> Packages</a></li>
+        <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+        <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Journal</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul class="footer-links">
+        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+        <li><a href="team.html"><i class="fas fa-chevron-right"></i> Our Team</a></li>
+        <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+92 300 1234567</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>hello@hnstravels.pk</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 HNS Travels. All rights reserved.</p></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
